@@ -24,14 +24,15 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Python's compiler - from CST to AST
-Python's compiler series:
+**Python's compiler series:**
 - [Python 3.8.0 execution flow](/blog/posts/python-3.8.0-execution-flow)
 - [Python's compiler - from grammar to DFA](/blog/posts/python-compiler-from-grammar-to-dfa)
 - [Python's compiler - the grammar file is not LL(1) but the parser is](/blog/posts/python-compiler-the-grammar-file-is-not-ll1-but-the-parser-is)
 - [Python's compiler - from tokens to CST](/blog/posts/python-compiler-from-tokens-to-cst)
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
+- [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 
-#### Use ASDL to define AST
+## Use ASDL to define AST
 Python's AST nodes' data structures are defined using the [ASDL](http://asdl.sourceforge.net/) (Zephyr Abstract Syntax Definition Language) file [Parser/Python.asdl](https://github.com/python/cpython/blob/v3.8.0/Parser/Python.asdl).
 
 The grammar of the ASDL file is:
@@ -51,7 +52,7 @@ constructor   ::= ConstructorId [fields]
 - `[]` means zero or one.
 - `{}` means one or more.
 
-#### Parse ASDL file to ASDL AST
+## Parse ASDL file to ASDL AST
 [Parser/asdl.py](https://github.com/python/cpython/blob/v3.8.0/Parser/asdl.py) parses the ASDL file to an ASDL AST (not to be confused with Python's AST).
 
 A modified version of [Parser/asdl.py](https://github.com/python/cpython/blob/v3.8.0/Parser/asdl.py) that pretty prints the ASDL AST:
@@ -873,7 +874,7 @@ Module(Python, [
 ])
 ```
 
-#### Compile ASDL AST to C code
+## Compile ASDL AST to C code
 [Parser/asdl_c.py](https://github.com/python/cpython/blob/v3.8.0/Parser/asdl_c.py) compiles the ASDL AST to Python's AST nodes' C data structures and processing functions, stored in files [Include/Python-ast.h](https://github.com/python/cpython/blob/v3.8.0/Include/Python-ast.h) and [Python/Python-ast.c](https://github.com/python/cpython/blob/v3.8.0/Python/Python-ast.c).
 
 The usage:
@@ -943,7 +944,7 @@ struct _mod {
 There are AST node constructor functions defined in [Python/Python-ast.c](https://github.com/python/cpython/blob/v3.8.0/Python/Python-ast.c#L1196).
 And there are constructor macros defined in [Include/Python-ast.h](https://github.com/python/cpython/blob/v3.8.0/Include/Python-ast.h#L477). Notice these macros change the corresponding constructor functions' name, e.g. the function name `Module` is changed to `_Py_Module`.
 
-#### Convert CST to AST
+## Convert CST to AST
 [Python/ast.c::PyAST_FromNodeObject](https://github.com/python/cpython/blob/v3.8.0/Python/ast.c#L772) converts a CST to AST, creating AST nodes using these constructor macros:
 ```
 ast.c--PyAST_FromNodeObject
@@ -981,7 +982,7 @@ ast.c--PyAST_FromNodeObject
     ...
 ```
 
-#### Expose AST to Python code
+## Expose AST to Python code
 [Python/ast.c](https://github.com/python/cpython/blob/v3.8.0/Python/Python-ast.c#L8771) also defines the `_ast` module, which exposes AST objects to Python code.
 
 [Python/Python-ast.c::PyAST_mod2obj](https://github.com/python/cpython/blob/v3.8.0/Python/Python-ast.c#L8984) converts an AST (C) node to AST (Python) object.

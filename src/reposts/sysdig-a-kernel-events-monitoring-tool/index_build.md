@@ -21,7 +21,6 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Sysdig a kernel events monitoring tool
-\
 Sysdig uses a kernel module to monitor kernel events like system calls. These events can be filtered, logged, analyzed to provide a very internal perspective of the monitored system.
 
 [Github](https://github.com/draios/sysdig)

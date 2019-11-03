@@ -54,7 +54,7 @@ python.c--main
                 # Run source code file.
                 pythonrun.c--PyRun_FileExFlags
 
-                  # Compile file to AST mod_ty.
+                  # Compile file to AST node.
                   pythonrun.c--PyParser_ASTFromFileObject
 
                     # Compile file to CST.
@@ -72,16 +72,16 @@ python.c--main
                         # Transit DFA and create CST nodes.
                         parser.c--PyParser_AddToken
 
-                    # Convert CST to AST mod_ty.
+                    # Convert CST to AST node.
                     ast.c--PyAST_FromNodeObject
 
-                  # Compile AST mod_ty to bytecode object and run.
+                  # Compile AST node to code object and run.
                   pythonrun.c--run_mod
 
-                    # Compile AST mod_ty to bytecode object.
+                    # Compile AST node to code object.
                     compile.c--PyAST_CompileObject
 
-                    # Run bytecode object.
+                    # Run code object.
                     pythonrun.c--run_eval_code_obj
 
                       ceval.c--PyEval_EvalCode
@@ -201,6 +201,35 @@ main.c--pymain_init
           pylifecycle.c--pycore_init_builtins
 
           pylifecycle.c--pycore_init_import_warnings
+
+            import.c--_PyImport_Init
+
+            import.c--_PyImportHooks_Init
+
+            _warnings.c--_PyWarnings_Init
+
+            if config->_install_importlib:
+              pylifecycle.c--init_importlib
+
+                # import.c--PyImport_ImportFrozenModule
+                PyImport_ImportFrozenModule("_frozen_importlib")
+
+                  import.c--PyImport_ImportFrozenModuleObject
+
+                    marshal.c--PyMarshal_ReadObjectFromString
+
+                # import.c--PyImport_AddModule
+                importlib = PyImport_AddModule("_frozen_importlib");
+
+                interp->importlib = importlib;
+
+                interp->import_func = PyDict_GetItemString(interp->builtins, "__import__");
+
+                import.c--PyInit__imp
+
+                import.c--_PyImport_SetModuleString("_imp", impmod)
+
+                PyObject_CallMethod(importlib, "_install", "OO", sysmod, impmod)
       else:
         pylifecycle.c--pyinit_core_reconfigure
 
@@ -238,7 +267,7 @@ main.c--pymain_init
 
           unicodeobject.c--init_stdio_encoding
 
-        if config->install_signal_handlers
+        if config->install_signal_handlers:
           pylifecycle.c--init_signals
 
             signalmodule.c--PyOS_InitInterrupts
@@ -431,10 +460,10 @@ pythonrun.c--PyRun_InteractiveLoopFlags
   # Run REPL mode once.
   pythonrun.c--PyRun_InteractiveOneObjectEx...(3AHSO)
 
-    # Compile file to AST mod_ty.
+    # Compile file to AST node.
     pythonrun.c--PyParser_ASTFromFileObject...(2EO8C)
 
-    # Compile AST mod_ty to bytecode object and run.
+    # Compile AST node to code object and run.
     pythonrun.c--run_mod...(24U9T)
 
     pythonrun.c--flush_io
@@ -476,10 +505,10 @@ pythonrun.c--PyRun_InteractiveOneObject
 # Run REPL mode once.
 pythonrun.c--PyRun_InteractiveOneObjectEx
 
-  # Compile file to AST mod_ty.
+  # Compile file to AST node.
   pythonrun.c--PyParser_ASTFromFileObject...(2EO8C)
 
-  # Compile AST mod_ty to bytecode object and run.
+  # Compile AST node to code object and run.
   pythonrun.c--run_mod...(24U9T)
 
 
@@ -511,7 +540,7 @@ pythonrun.c--PyRun_SimpleFileExFlags
   if input file is pyc:
     pythonrun.c--set_main_loader(d, filename, "SourcelessFileLoader")
 
-    # Run bytecode file.
+    # Run pyc file.
     pythonrun.c--run_pyc_file...(5QY8K)
 
   else:
@@ -556,10 +585,10 @@ pythonrun.c--PyRun_FileEx
 # Run source code file.
 pythonrun.c--PyRun_FileExFlags
 
-  # Compile file to AST mod_ty.
+  # Compile file to AST node.
   pythonrun.c--PyParser_ASTFromFileObject...(2EO8C)
 
-  # Compile AST mod_ty to bytecode object and run.
+  # Compile AST node to code object and run.
   pythonrun.c--run_mod...(24U9T)
 
 
@@ -597,10 +626,10 @@ pythonrun.c--PyRun_String
 # Run source code string.
 pythonrun.c--PyRun_StringFlags
 
-  # Compile string to AST mod_ty.
+  # Compile string to AST node.
   pythonrun.c--PyParser_ASTFromStringObject...(7FMMG)
 
-  # Compile AST to bytecode object and run.
+  # Compile AST to code object and run.
   pythonrun.c--run_mod...(24U9T)
 
 
@@ -617,11 +646,11 @@ bltinmodule.c--builtin_exec_impl
 
 
 # ----- 5H5FI -----
-# Run bytecode object or source code string.
+# Run code object or source code string.
 bltinmodule.c--builtin_eval_impl
 
-  if is bytecode object:
-    # Run bytecode object.
+  if is code object:
+    # Run code object.
     ceval.c--PyEval_EvalCode
   else:
     # Run source code string.
@@ -796,40 +825,40 @@ ast.c--PyAST_FromNodeObject
 
 
 # ----- 52SA2 -----
-# Compile file to AST mod_ty.
+# Compile file to AST node.
 pythonrun.c--PyParser_ASTFromFile
 
   # Create unicode file name
   unicodeobject.c--PyUnicode_DecodeFSDefault
 
-  # Compile file to AST mod_ty.
+  # Compile file to AST node.
   pythonrun.c--PyParser_ASTFromFileObject...(2EO8C)
 
 
 # ----- 2EO8C -----
-# Compile file to AST mod_ty.
+# Compile file to AST node.
 pythonrun.c--PyParser_ASTFromFileObject
 
   # Compile file to CST.
   # Argument grammar=&_PyParser_Grammar
   parsetok.c--PyParser_ParseFileObject...(6QYRQ)
 
-  # Convert CST to AST mod_ty.
+  # Convert CST to AST node.
   ast.c--PyAST_FromNodeObject...(57I7M)
 
 
 # ----- 6QSZL -----
-# Compile string to AST mod_ty.
+# Compile string to AST node.
 pythonrun.c-PyParser_ASTFromString
   # Create unicode file name
   unicodeobject.c--PyUnicode_DecodeFSDefault
 
-  # Compile string to AST mod_ty.
+  # Compile string to AST node.
   pythonrun.c--PyParser_ASTFromStringObject...(7FMMG)
 
 
 # ----- 7FMMG -----
-# Compile string to AST mod_ty.
+# Compile string to AST node.
 pythonrun.c--PyParser_ASTFromStringObject
 
   # Compile string to CST.
@@ -839,52 +868,52 @@ pythonrun.c--PyParser_ASTFromStringObject
     # Compile string to CST.
     parsetok.c--parsetok...(68SVC)
 
-  # Convert CST to AST mod_ty.
+  # Convert CST to AST node.
   ast.c--PyAST_FromNodeObject...(57I7M)
 
 
 # ----- 5FZWJ -----
-# Compile AST mod_ty to bytecode object.
+# Compile AST node to code object.
 compile.c--PyAST_CompileObject
 
 
 # ----- 24U9T -----
-# Compile AST mod_ty to bytecode object and run.
+# Compile AST node to code object and run.
 pythonrun.c--run_mod
-  # Compile AST mod_ty to bytecode object.
+  # Compile AST node to code object.
   compile.c--PyAST_CompileObject...(5FZWJ)
 
-  # Run bytecode object.
+  # Run code object.
   pythonrun.c--run_eval_code_obj...(6NNRX)
 
 
 # ----- 2HBRP -----
-# Compile string to bytecode object.
+# Compile string to code object.
 pythonrun.c--Py_CompileString
 
-  # Compile string to bytecode object.
+  # Compile string to code object.
   # Argument flags=NULL
   # Argument optimize=-1
   pythonrun.c--Py_CompileStringExFlags
 
 
 # ----- 7QLOP -----
-# Compile string to bytecode object.
+# Compile string to code object.
 pythonrun.c--Py_CompileStringFlags
 
-  # Compile string to bytecode object.
+  # Compile string to code object.
   # Argument optimize=-1
   pythonrun.c--Py_CompileStringExFlags
 
 
 # ----- 6QYQF -----
-# Compile string to bytecode object.
+# Compile string to code object.
 pythonrun.c--Py_CompileStringExFlags
 
   # Create unicode file name
   unicodeobject.c--PyUnicode_DecodeFSDefault
 
-  # Compile string to bytecode object.
+  # Compile string to AST object or code object.
   pythonrun.c--Py_CompileStringObject...(7CPPY)
 
 
@@ -894,46 +923,73 @@ _freeze_importlib.c--main
 
 
 # ----- 7CPPY -----
-# Compile string to bytecode object.
+# Compile string to AST object or code object.
 pythonrun.c--Py_CompileStringObject
-
-  # Compile string to AST mod_ty.
+  # Compile string to AST node.
   pythonrun.c--PyParser_ASTFromStringObject...(7FMMG)
 
-  # Compile AST mod_ty to bytecode object.
-  compile.c--PyAST_CompileObject...(5FZWJ)
+  if flag PyCF_ONLY_AST is on:
+    # Convert AST node to AST object.
+    Python-ast.c--PyAST_mod2obj
+  else:
+    # Compile AST node to code object.
+    compile.c--PyAST_CompileObject...(5FZWJ)
+
+
+# ----- 5VXWX -----
+# Compile string or AST object to code object.
+# Exposed as builtin function.
+bltinmodule.c.h--builtin_compile
+
+  # Compile string or AST object to code object.
+  bltinmodule.c--builtin_compile_impl
 
 
 # ----- 3WFME -----
-# Compile string or AST object to bytecode object.
+# Compile string or AST object to code object.
 bltinmodule.c--builtin_compile_impl
-  if is_ast:
-    # Convert AST object to AST mod_ty.
+  if is AST object:
+    # Convert AST object to AST node.
     ast.c--PyAST_obj2mod
 
-    # Compile AST mod_ty to bytecode object.
+    # Compile AST node to code object.
     compile.c--PyAST_CompileObject...(5FZWJ)
   else:
-    # Compile string to bytecode object.
+    # Compile string to AST object or code object.
     pythonrun.c--Py_CompileStringObject...(7CPPY)
 
 
 # ----- 5QY8K -----
-# Run bytecode file.
+# Run pyc file.
 pythonrun.c--run_pyc_file
 
-  # Read bytecode from file
+  # Read magic number the from pyc file.
   marshal.c--PyMarshal_ReadLongFromFile
 
-  # Read bytecode from file
+  # Read code object the from pyc file.
   marshal.c--PyMarshal_ReadLastObjectFromFile
 
-  # Run bytecode object.
+    if file size <= REASONABLE_FILE_LIMIT:
+      # Allocate a read buffer.
+
+      # Read file data into the read buffer.
+
+      # Read code object from the read buffer.
+      marshal.c--PyMarshal_ReadObjectFromString
+
+        marshal.c--r_object
+    else:
+      # Read code object from the file.
+      marshal.c--PyMarshal_ReadObjectFromFile
+
+        marshal.c--r_object
+
+  # Run code object.
   pythonrun.c--run_eval_code_obj...(6NNRX)
 
 
 # ----- 6NNRX -----
-# Run bytecode object.
+# Run code object.
 pythonrun.c--run_eval_code_obj
   PyDict_SetItemString(globals, "__builtins__", interp->builtins)
 

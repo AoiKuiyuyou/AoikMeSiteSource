@@ -27,7 +27,6 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Alibaba IT resources
-\
 [《九年双11互联网技术超级工程》](https://102.alibaba.com/downloadFile.do?file=1516614343703/AliDouble11.pdf)
 
 [《阿里技术参考图册算法篇》](https://102.alibaba.com/downloadFile.do?file=1523848064814/AliTech101_Algorithms.pdf)

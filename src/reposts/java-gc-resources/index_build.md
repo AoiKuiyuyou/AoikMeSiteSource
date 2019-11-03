@@ -22,7 +22,6 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Java GC resources
-\
 [Java Garbage Collection 101](https://michalplachta.com/2014/04/27/java-garbage-collection-101/)
 
 [Understanding Java Garbage Collection](https://www.cubrid.org/blog/understanding-java-garbage-collection)

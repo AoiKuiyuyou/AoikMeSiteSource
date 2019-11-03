@@ -21,5 +21,4 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # CPU level software optimization resources
-\
 [CPU level software optimization resources](https://www.agner.org/optimize/)

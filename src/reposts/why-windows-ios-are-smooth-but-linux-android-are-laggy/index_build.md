@@ -24,5 +24,4 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # 为什么Windows/iOS操作很流畅而Linux/Android却很卡顿呢
-\
 [Link1 (Origin)](https://blog.csdn.net/dog250/article/details/96362789), [Link2 (WeChat)](https://mp.weixin.qq.com/s/2tkBhW8btWknRjlQ6o-azw)

@@ -24,12 +24,13 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Python's compiler - from tokens to CST
-Python's compiler series:
+**Python's compiler series:**
 - [Python 3.8.0 execution flow](/blog/posts/python-3.8.0-execution-flow)
 - [Python's compiler - from grammar to DFA](/blog/posts/python-compiler-from-grammar-to-dfa)
 - [Python's compiler - the grammar file is not LL(1) but the parser is](/blog/posts/python-compiler-the-grammar-file-is-not-ll1-but-the-parser-is)
 - [Python's compiler - from tokens to CST](/blog/posts/python-compiler-from-tokens-to-cst)
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
+- [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 
 \
 In Python 3.8.0, the [pgen](https://github.com/python/cpython/tree/v3.8.0/Parser/pgen) program converts the [grammar file](https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar) into DFA transition diagram, stored as files [Include/graminit.h](https://github.com/python/cpython/blob/v3.8.0/Include/graminit.h) and [Python/graminit.c](https://github.com/python/cpython/blob/v3.8.0/Python/graminit.c).
