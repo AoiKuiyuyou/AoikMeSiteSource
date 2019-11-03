@@ -21,6 +21,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Git data structure
+\
 [Understanding Git - Data Model](https://hackernoon.com/https-medium-com-zspajich-understanding-git-data-model-95eb16cc99f5)
 
 [Understanding Git - Branching](https://hackernoon.com/understanding-git-branching-2662f5882f9)

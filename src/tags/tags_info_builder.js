@@ -101,7 +101,7 @@ function builder(options) {
 		var post_meta_array = map_tag_to_post_meta_array[tag];
 
 		post_meta_array.sort(function (a, b) {
-			return a.create_time < b.create_time;
+			return a.create_time < b.create_time ? 1 : -1;
 		});
 	});
 

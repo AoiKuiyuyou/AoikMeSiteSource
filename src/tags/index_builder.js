@@ -33,7 +33,7 @@ function builder(options) {
 		var post_meta_array = map_tag_to_post_meta_array[tag];
 
 		post_meta_array.sort(function (a, b) {
-			return a.create_moment < b.create_moment;
+			return a.create_moment < b.create_moment ? 1 : -1;
 		});
 	});
 

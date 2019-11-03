@@ -1,8 +1,8 @@
---- yaml | extend://meta://root://src/posts/_base/post_page_base_build.md
+--- yaml | extend://meta://root://src/reposts/_base/repost_page_base_build.md
 
-title: Load balancing articles
+title: Load balancing resources
 
-author: Aoik
+author: Repost
 
 create_time: 2018-12-08 20:00:00
 
@@ -19,7 +19,7 @@ $template:
 $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
-# Load balancing articles
+# Load balancing resources
 
 
 ## General
