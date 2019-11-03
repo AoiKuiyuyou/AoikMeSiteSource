@@ -1,0 +1,55 @@
+// This file is in JSON5 fortmat.
+// Will be parsed to `package.json` in JSON format.
+{
+	"name": "AoikMeSiteSource",
+	"version": "0.0.1",
+	"description": "The source code of site `https://aoik.me/`.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AoiKuiyuyou/AoikMeSiteSource"
+	},
+	"author": "Aoi.Kuiyuyou",
+	"license": "MIT",
+	"devDependencies": {
+		// Delete files
+		"del": "5.0.0",
+		// File operation utility
+		"fs-extra": "8.1.0",
+		// Find file paths
+		"glob": "7.1.4",
+		// gulp
+		"gulp": "4.0.2",
+		// Add vendor prefixes to CSS properties
+		"gulp-autoprefixer": "7.0.0",
+		// Accept only changed items in gulp pipe
+		"gulp-changed": "4.0.1",
+		// Tidy CSS
+		"gulp-csscomb": "3.0.8",
+		// Lint JS
+		"gulp-eslint": "6.0.0",
+		// Ignore items in gulp pipe
+		"gulp-ignore": "3.0.0",
+		// Tidy JS
+		"gulp-jsbeautifier": "3.0.1",
+		// Rename items in gulp pipe
+		"gulp-rename": "1.4.0",
+		// Run shell command
+		"gulp-shell": "0.7.1",
+		// gulp utility
+		"gulp-util": "3.0.8",
+		// Parse JSON5
+		"json5": "2.1.0",
+		// Parse YAML
+		"js-yaml": "3.13.1",
+		// Render markdown to HTML
+		"marked": "0.7.0",
+		// Merge objects
+		"merge": "1.2.1",
+		// Make directories
+		"mkdirp": "0.5.1",
+		// Handle datetime
+		"moment": "2.24.0",
+		// Render nunjucks template
+		"nunjucks": "3.2.0",
+	}
+}

@@ -1,0 +1,61 @@
+{% extends "root://src/_base/page_base.html" %}
+
+{% block head_title %}Aoik{% endblock %}
+
+{% block head_styles %}
+{{ super() }}
+<style type="text/css">
+</style>
+{% endblock %}
+
+{% block main_inner %}
+<div id="tag_cloud_upper" class="tag_cloud_upper"></div>
+{% endblock %}
+
+{% block bottom_scripts %}
+<script type="text/javascript" src="{{jquery_js_url}}"></script>
+<script type="text/javascript" src="{{jquery_svg3dtagcloud_js_url}}"></script>
+<script>
+$(document).ready(function() {
+    var entries = [
+    {% for tag_name, _ in tags_info %}
+        {label: '{{tag_name}}', url: '/blog/tags/{{tag_name}}', target: '_blank'},
+    {% endfor %}
+    ];
+
+    var settings = {
+        entries: entries,
+        width: 800,
+        height: 600,
+        radius: '85%',
+        radiusMin: 75,
+        bgDraw: false,
+        bgColor: '#EFEFEF',
+        opacityOver: 1.00,
+        opacityOut: 0.1,
+        opacitySpeed: 6,
+        fov: 800,
+        speed: 0.3,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '20',
+        fontColor: '#0366d6',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        fontToUpperCase: false,
+        tooltipFontFamily: 'Arial, sans-serif',
+        tooltipFontSize: '12',
+        tooltipFontColor: '#fff',
+        tooltipFontWeight: 'normal',
+        tooltipFontStyle: 'normal',
+        tooltipFontStretch: 'normal',
+        tooltipFontToUpperCase: false,
+        tooltipTextAnchor: 'left',
+        tooltipDiffX: 0,
+        tooltipDiffY: 10
+    };
+
+    $('#tag_cloud_upper').svg3DTagCloud(settings);
+});
+</script>
+{% endblock %}
