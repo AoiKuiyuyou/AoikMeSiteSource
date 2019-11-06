@@ -10,6 +10,7 @@ tags:
     - python
     - compiler
     - parser
+    - cst
     - source-code-study
     - 吸星大法强吃源码
 
@@ -31,6 +32,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from tokens to CST](/blog/posts/python-compiler-from-tokens-to-cst)
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
+- [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
 
 \
 In Python 3.8.0, the [pgen](https://github.com/python/cpython/tree/v3.8.0/Parser/pgen) program converts the [grammar file](https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar) into DFA transition diagram, stored as files [Include/graminit.h](https://github.com/python/cpython/blob/v3.8.0/Include/graminit.h) and [Python/graminit.c](https://github.com/python/cpython/blob/v3.8.0/Python/graminit.c).

@@ -33,6 +33,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from tokens to CST](/blog/posts/python-compiler-from-tokens-to-cst)
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
+- [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
 
 \
 Python's grammar is LL(1). Instead of using a top-down recursive descent parser, Python uses a DFA-based (Pushdown Automata, more precisely) parser. In Python 3.7, the parser generator **pgen** ([Parser/pgenmain.c](https://github.com/python/cpython/blob/v3.7.0/Parser/pgenmain.c), [Parser/pgen.c](https://github.com/python/cpython/blob/v3.7.0/Parser/pgen.c)) is responsible for parsing the grammar file [Grammar/Grammar](https://github.com/python/cpython/blob/v3.7.0/Grammar/Grammar) into DFA transition diagram, stored as files [Include/graminit.h](https://github.com/python/cpython/blob/v3.7.0/Include/graminit.h) and [Python/graminit.c](https://github.com/python/cpython/blob/v3.7.0/Python/graminit.c). The DFA transition diagram is then used by the DFA-based parser to parse Python code.

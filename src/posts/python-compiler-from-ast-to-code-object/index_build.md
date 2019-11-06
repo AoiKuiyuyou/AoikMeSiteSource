@@ -9,6 +9,8 @@ create_time: 2019-11-03 20:00:00
 tags:
     - python
     - compiler
+    - ast
+    - code-object
     - source-code-study
     - 吸星大法强吃源码
 
@@ -30,6 +32,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from tokens to CST](/blog/posts/python-compiler-from-tokens-to-cst)
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
+- [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
 
 \
 [Python/compile.c::PyAST_CompileObject](https://github.com/python/cpython/blob/v3.8.0/Python/compile.c#L312) compiles AST node to code object.
