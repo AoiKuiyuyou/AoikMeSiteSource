@@ -32,6 +32,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 - [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
+- [Python's compiler - from pyc file to code object](/blog/posts/python-compiler-from-pyc-file-to-code-object)
 
 \
 Python's grammar is LL(1), but its [grammar file](https://github.com/python/cpython/blob/v3.8.0/Grammar/Grammar) is not. Take one rule in the grammar file

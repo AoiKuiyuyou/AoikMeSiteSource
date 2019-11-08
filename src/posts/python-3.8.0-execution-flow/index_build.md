@@ -42,13 +42,13 @@ python.c--main
 
         main.c--pymain_run_python
 
-          # Run bytecode file or source code file, or run REPL mode loop.
+          # Run pyc file or source code file, or run REPL mode loop.
           main.c--pymain_run_filename
 
-            # Run bytecode file or source code file, or run REPL mode loop.
+            # Run pyc file or source code file, or run REPL mode loop.
             pythonrun.c--PyRun_AnyFileExFlags
 
-              # Run bytecode file or source code file, or print error.
+              # Run pyc file or source code file, or print error.
               pythonrun.c--PyRun_SimpleFileExFlags
 
                 # Run source code file.
@@ -331,7 +331,7 @@ main.c--Py_RunMain
       main.c--pymain_run_module...(7K9R2)(L"__main__", 0)
 
     elif if config->run_filename != NULL:
-      # Run bytecode file or source code file, or run REPL mode loop.
+      # Run pyc file or source code file, or run REPL mode loop.
       main.c--pymain_run_filename...(2CMFT)
 
     else:
@@ -352,7 +352,7 @@ main.c--pymain_repl
 
   main.c--pymain_run_interactive_hook
 
-  # Run bytecode file or source code file,
+  # Run pyc file or source code file,
   # or run REPL mode.
   pythonrun.c--PyRun_AnyFileFlags...(2TCT7)
 
@@ -363,14 +363,14 @@ main.c--pymain_run_stdin
   if stdin_is_interactive(config):
     main.c--pymain_run_startup
 
-      # Run bytecode file or source code file, or print error.
+      # Run pyc file or source code file, or print error.
       pythonrun.c--PyRun_SimpleFileExFlags...(5KWHC)
 
     main.c--pymain_run_interactive_hook
 
     ceval.c--Py_MakePendingCalls
 
-    # Run bytecode file or source code file, or run REPL mode loop.
+    # Run pyc file or source code file, or run REPL mode loop.
     pythonrun.c--PyRun_AnyFileExFlags...(3DSCF)
 
 
@@ -386,7 +386,7 @@ main.c--pymain_run_module
 
 
 # ----- 2CMFT -----
-# Run bytecode file or source code file, or run REPL mode loop.
+# Run pyc file or source code file, or run REPL mode loop.
 main.c--pymain_run_filename
 
   main.c--pymain_run_startup
@@ -401,46 +401,46 @@ main.c--pymain_run_filename
 
     ceval.c--Py_MakePendingCalls
 
-    # Run bytecode file or source code file, or run REPL mode loop.
+    # Run pyc file or source code file, or run REPL mode loop.
     pythonrun.c--PyRun_AnyFileExFlags...(3DSCF)
 
 
 # ----- 37NUC -----
-# Run bytecode file or source code file, or run REPL mode loop.
+# Run pyc file or source code file, or run REPL mode loop.
 pythonrun.c--PyRun_AnyFile
 
-  # Run bytecode file or source code file, or run REPL mode loop.
+  # Run pyc file or source code file, or run REPL mode loop.
   # Argument closeit=0
   # Argument flags=NULL
   pythonrun.c--PyRun_AnyFileExFlags...(3DSCF)
 
 
 # ----- 7YOPN -----
-# Run bytecode file or source code file, or run REPL mode loop.
+# Run pyc file or source code file, or run REPL mode loop.
 pythonrun.c--PyRun_AnyFileEx
 
-  # Run bytecode file or source code file, or run REPL mode loop.
+  # Run pyc file or source code file, or run REPL mode loop.
   # Argument flags=NULL
   pythonrun.c--PyRun_AnyFileExFlags...(3DSCF)
 
 
 # ----- 2TCT7 -----
-# Run bytecode file or source code file, or run REPL mode loop.
+# Run pyc file or source code file, or run REPL mode loop.
 pythonrun.c--PyRun_AnyFileFlags
 
-  # Run bytecode file or source code file, or run REPL mode loop.
+  # Run pyc file or source code file, or run REPL mode loop.
   # Argument closeit=0
   pythonrun.c--PyRun_AnyFileExFlags...(3DSCF)
 
 
 # ----- 3DSCF -----
-# Run bytecode file or source code file, or run REPL mode loop. pythonrun.c--PyRun_AnyFileExFlags
+# Run pyc file or source code file, or run REPL mode loop. pythonrun.c--PyRun_AnyFileExFlags
 
   if input file is interactive:
     # Run REPL mode loop.
     pythonrun.c--PyRun_InteractiveLoopFlags...(6MR72)
   else:
-    # Run bytecode file or source code file, or print error.
+    # Run pyc file or source code file, or print error.
     pythonrun.c--PyRun_SimpleFileExFlags...(5KWHC)
 
 
@@ -496,6 +496,7 @@ pythonrun.c--PyRun_InteractiveOneObject
   pythonrun.c--PyRun_InteractiveOneObjectEx
 
   if failed:
+    # Print error.
     pythonrun.c--PyErr_Print
 
     pythonrun.c--flush_io
@@ -513,43 +514,47 @@ pythonrun.c--PyRun_InteractiveOneObjectEx
 
 
 # ----- 65PFM -----
-# Run bytecode file or source code file, or print error.
+# Run pyc file or source code file, or print error.
 pythonrun.c--PyRun_SimpleFile
 
-  # Run bytecode file or source code file, or print error.
+  # Run pyc file or source code file, or print error.
   # Argument closeit=0
   # Argument flags=NULL
-  pythonrun.c--PyRun_SimpleFileExFlags
+  pythonrun.c--PyRun_SimpleFileExFlags..(5KWHC)
 
 
 # ----- 7VDBN -----
-# Run bytecode file or source code file, or print error.
+# Run pyc file or source code file, or print error.
 pythonrun.c--PyRun_SimpleFileEx
 
-  # Run bytecode file or source code file, or print error.
+  # Run pyc file or source code file, or print error.
   # Argument flags=NULL
-  pythonrun.c--PyRun_SimpleFileExFlags
+  pythonrun.c--PyRun_SimpleFileExFlags..(5KWHC)
 
 
 # ----- 5KWHC -----
-# Run bytecode file or source code file, or print error.
+# Run pyc file or source code file, or print error.
 pythonrun.c--PyRun_SimpleFileExFlags
 
+  # Get main module.
   import.c--PyImport_AddModule("__main__")
 
   if input file is pyc:
+    # Set main module's loader.
     pythonrun.c--set_main_loader(d, filename, "SourcelessFileLoader")
 
     # Run pyc file.
     pythonrun.c--run_pyc_file...(5QY8K)
 
   else:
+    # Set main module's loader.
     pythonrun.c--set_main_loader(d, filename, "SourceFileLoader")
 
     # Run source code file.
     pythonrun.c--PyRun_FileExFlags...(5CDIU)
 
   if failed:
+    # Print error.
     pythonrun.c--PyErr_Print
 
 
@@ -610,6 +615,7 @@ pythonrun.c--PyRun_SimpleStringFlags
   pythonrun.c--PyRun_StringFlags...(69YSH)
 
   if failed:
+    # Print error.
     pythonrun.c--PyErr_Print
 
 
@@ -974,15 +980,17 @@ pythonrun.c--run_pyc_file
 
       # Read file data into the read buffer.
 
-      # Read code object from the read buffer.
+      # Unmarshal object from the read buffer.
       marshal.c--PyMarshal_ReadObjectFromString
 
-        marshal.c--r_object
+        # Unmarshal object.
+        marshal.c--r_object..(5XMEB)
     else:
-      # Read code object from the file.
+      # Unmarshal object from the file.
       marshal.c--PyMarshal_ReadObjectFromFile
 
-        marshal.c--r_object
+        # Unmarshal object.
+        marshal.c--r_object..(5XMEB)
 
   # Run code object.
   pythonrun.c--run_eval_code_obj...(6NNRX)

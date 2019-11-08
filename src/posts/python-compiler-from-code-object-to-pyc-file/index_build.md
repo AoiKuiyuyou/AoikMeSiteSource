@@ -33,13 +33,12 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 - [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
+- [Python's compiler - from pyc file to code object](/blog/posts/python-compiler-from-pyc-file-to-code-object)
 
 \
 When importing a module for the first time, the module file's source code is
-compiled to code object. The code object is then marshaled to a `pyc` file to
+compiled to code object. The code object is then marshalled to a pyc file to
 speed up the importing next time.
-
-To import a module, we can either use `import` statement, or use `builtins.__import__` or `importlib.__import__`.
 
 ```
 # ----- 7HQTL -----
@@ -110,7 +109,7 @@ importlib._bootstrap._find_and_load
 
 
 # ----- 7HMAH -----
-# Get code object from source.
+# Get code object.
 importlib._bootstrap_external.SourceLoader.get_code
 
   # Read file data.
@@ -129,8 +128,8 @@ importlib._bootstrap_external.SourceLoader.get_code
     # Validate using timestamp.
     importlib._bootstrap_external._validate_timestamp_pyc
 
-  if not have error:
-    # Unmarshal file data to code object.
+  if the pyc data is validated:
+    # Unmarshal the pyc data to code object.
     importlib._bootstrap_external._compile_bytecode
 
     return

@@ -34,6 +34,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 - [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
+- [Python's compiler - from pyc file to code object](/blog/posts/python-compiler-from-pyc-file-to-code-object)
 
 ## Use ASDL to define AST
 Python's AST nodes' data structures are defined using the [ASDL](http://asdl.sourceforge.net/) (Zephyr Abstract Syntax Definition Language) file [Parser/Python.asdl](https://github.com/python/cpython/blob/v3.8.0/Parser/Python.asdl).

@@ -33,6 +33,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 - [Python's compiler - from CST to AST](/blog/posts/python-compiler-from-cst-to-ast)
 - [Python's compiler - from AST to code object](/blog/posts/python-compiler-from-ast-to-code-object)
 - [Python's compiler - from code object to pyc file](/blog/posts/python-compiler-from-code-object-to-pyc-file)
+- [Python's compiler - from pyc file to code object](/blog/posts/python-compiler-from-pyc-file-to-code-object)
 
 \
 [Python/compile.c::PyAST_CompileObject](https://github.com/python/cpython/blob/v3.8.0/Python/compile.c#L312) compiles AST node to code object.
@@ -1110,5 +1111,31 @@ codeobject.c--PyCode_NewWithPosOnlyArgs
   
   # code.h--PyCodeObject
   # codeobject.c--PyCode_Type
-  PyObject_NEW(PyCodeObject, &PyCode_Type)
+  co = PyObject_NEW(PyCodeObject, &PyCode_Type)
+
+  co->co_argcount = argcount;
+  co->co_posonlyargcount = posonlyargcount;
+  co->co_kwonlyargcount = kwonlyargcount;
+  co->co_nlocals = nlocals;
+  co->co_stacksize = stacksize;
+  co->co_flags = flags;
+  co->co_code = code;
+  co->co_consts = consts;
+  co->co_names = names;
+  co->co_varnames = varnames;
+  co->co_freevars = freevars;
+  co->co_cellvars = cellvars;
+  co->co_cell2arg = cell2arg;
+  co->co_filename = filename;
+  co->co_name = name;
+  co->co_firstlineno = firstlineno;
+  co->co_lnotab = lnotab;
+  co->co_zombieframe = NULL;
+  co->co_weakreflist = NULL;
+  co->co_extra = NULL;
+
+  co->co_opcache_map = NULL;
+  co->co_opcache = NULL;
+  co->co_opcache_flag = 0;
+  co->co_opcache_size = 0;
 ````
