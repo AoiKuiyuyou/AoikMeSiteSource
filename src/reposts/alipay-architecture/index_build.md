@@ -21,4 +21,4 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 
 --- markdown | template | output
 # Alipay architecture
-[Link](https://mp.weixin.qq.com/s/kQ8hGSl4joAn3Tj9BSV3Eg)
+[Link](https://mp.weixin.qq.com/s/RxjBtIO8GdshYyod1KWb1Q)

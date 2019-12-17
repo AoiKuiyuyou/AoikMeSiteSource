@@ -8,7 +8,7 @@ create_time: 2019-12-08 20:00:00
 
 tags:
     - mysql
-    - replication
+    - mysql-replication
 
 post_id: 57
 
@@ -45,7 +45,8 @@ Relay_Master_Log_File: _RELAY_MASTER_LOG_FILE_
 Exec_Master_Log_Pos: _EXEC_MASTER_LOG_POS_
 ```
 
-The error may be caused by either a corrupted master binlog file or relay binlog file.
+The error may be caused by either a corrupted master binlog file or relay
+binlog file.
 
 \
 Run on master OS to check whether the master binlog file is corrupted:
@@ -53,7 +54,7 @@ Run on master OS to check whether the master binlog file is corrupted:
 mysqlbinlog /var/lib/mysql/_RELAY_MASTER_LOG_FILE_ > /dev/null
 ```
 
-If the master binlog file is corrupted, the replication setup has to be done again.
+If the master binlog file is corrupted, the <a href="https://aoik.me/blog/posts/mysql-master-slave-replication-setup">replication setup</a> has to be done again.
 
 \
 Run on slave OS to check whether the relay binlog file is corrupted:
@@ -79,7 +80,10 @@ START SLAVE;
 The slave will start replication from the next GTID.
 
 \
-Instead, if the error is not caused by a corrupted relay binlog file but an offending transaction, we can skip that transaction. (Notice offending transactions often indicate inconsistency between the master and slave's data. Skipping them might not be sufficient to recover from the inconsistency.)
+Instead, if the error is not caused by a corrupted relay binlog file but an
+offending transaction, we can skip that transaction. (Notice offending
+transactions often indicate inconsistency between the master and slave's data.
+Skipping them might not be sufficient to recover from the inconsistency.)
 
 Run on master OS:
 ```

@@ -8,7 +8,7 @@ create_time: 2019-04-03 19:00:00
 
 tags:
     - mysql
-    - replication
+    - mysql-replication
 
 post_id: 23
 
