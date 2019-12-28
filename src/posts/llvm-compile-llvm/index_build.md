@@ -137,6 +137,8 @@ Download LLVM source code from [here](https://github.com/llvm/llvm-project/relea
 
 Decompress to `D:\llvm\9.0.1rc3\src`.
 
+Rename `D:\llvm\9.0.1rc3\src\bindings\_LLVMBuild.txt` to `D:\llvm\9.0.1rc3\src\bindings\LLVMBuild.txt`.
+
 ### Prepare build script ###
 We use a modified version of the build script from the [LLVM-Build-Windows](https://github.com/ajkhoury/LLVM-Build-Windows/blob/master/build-llvm.bat) project. The
 modification is needed to pass the correct architecture, build type and build
@@ -466,7 +468,7 @@ exit /b 0
 
 :dobuild
 echo %BUILD_TYPE%
-:cmake --build "%BUILD_DIR%" --config %BUILD_TYPE%
+cmake --build "%BUILD_DIR%" --config %BUILD_TYPE%
 exit /b 0
 
 :printhelp
@@ -497,7 +499,9 @@ Run:
 ```
 cd D:\llvm\9.0.1rc3\src
 
-build-llvm.bat -configure -build -static -target x64 -directory build_x64
+build-llvm.bat -configure -static -target x64 -directory build_x64
+
+build-llvm.bat -build -static -target x64 -directory build_x64
 ```
 
 ### Compile LLVM example code ###
@@ -526,7 +530,7 @@ In `Configuration Properties` - `Command Line`, set `Additional Options` to be
 In `Configuration Properties` - `Linker` - `General`, set
 `Additional Library Directories` to be `D:\llvm\9.0.1rc3\src\build_x64\Release\lib`.
 
-In `Configuration Properties` - `Linker` - `Input`, set `Additional Dependencies` to be `kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);LLVM-C.lib;LLVMAggressiveInstCombine.lib;LLVMAnalysis.lib;LLVMAsmParser.lib;LLVMAsmPrinter.lib;LLVMBinaryFormat.lib;LLVMBitReader.lib;LLVMBitstreamReader.lib;LLVMBitWriter.lib;LLVMCodeGen.lib;LLVMCore.lib;LLVMCoroutines.lib;LLVMCoverage.lib;LLVMDebugInfoCodeView.lib;LLVMDebugInfoDWARF.lib;LLVMDebugInfoGSYM.lib;LLVMDebugInfoMSF.lib;LLVMDebugInfoPDB.lib;LLVMDemangle.lib;LLVMDlltoolDriver.lib;LLVMExecutionEngine.lib;LLVMFuzzMutate.lib;LLVMGlobalISel.lib;LLVMInstCombine.lib;LLVMInstrumentation.lib;LLVMInterpreter.lib;LLVMipo.lib;LLVMIRReader.lib;LLVMJITLink.lib;LLVMLibDriver.lib;LLVMLineEditor.lib;LLVMLinker.lib;LLVMLTO.lib;LLVMMC.lib;LLVMMCA.lib;LLVMMCDisassembler.lib;LLVMMCJIT.lib;LLVMMCParser.lib;LLVMMIRParser.lib;LLVMObjCARCOpts.lib;LLVMObject.lib;LLVMObjectYAML.lib;LLVMOption.lib;LLVMOrcJIT.lib;LLVMPasses.lib;LLVMProfileData.lib;LLVMRemarks.lib;LLVMRuntimeDyld.lib;LLVMScalarOpts.lib;LLVMSelectionDAG.lib;LLVMSupport.lib;LLVMSymbolize.lib;LLVMTableGen.lib;LLVMTarget.lib;LLVMTextAPI.lib;LLVMTransformUtils.lib;LLVMVectorize.lib;LLVMWindowsManifest.lib;LLVMX86AsmParser.lib;LLVMX86CodeGen.lib;LLVMX86Desc.lib;LLVMX86Disassembler.lib;LLVMX86Info.lib;LLVMX86Utils.lib;LLVMXRay.lib;LTO.lib;Remarks.lib`.
+In `Configuration Properties` - `Linker` - `Input`, set `Additional Dependencies` to be `LLVMDemangle.lib;LLVMSupport.lib;LLVMTableGen.lib;LLVMCore.lib;LLVMFuzzMutate.lib;LLVMIRReader.lib;LLVMCodeGen.lib;LLVMSelectionDAG.lib;LLVMAsmPrinter.lib;LLVMMIRParser.lib;LLVMGlobalISel.lib;LLVMBinaryFormat.lib;LLVMBitReader.lib;LLVMBitWriter.lib;LLVMBitstreamReader.lib;LLVMTransformUtils.lib;LLVMInstrumentation.lib;LLVMAggressiveInstCombine.lib;LLVMInstCombine.lib;LLVMScalarOpts.lib;LLVMipo.lib;LLVMVectorize.lib;LLVMObjCARCOpts.lib;LLVMCoroutines.lib;LLVMLinker.lib;LLVMAnalysis.lib;LLVMLTO.lib;LLVMMC.lib;LLVMMCParser.lib;LLVMMCDisassembler.lib;LLVMMCA.lib;LLVMObject.lib;LLVMObjectYAML.lib;LLVMOption.lib;LLVMRemarks.lib;LLVMDebugInfoDWARF.lib;LLVMDebugInfoGSYM.lib;LLVMDebugInfoMSF.lib;LLVMDebugInfoCodeView.lib;LLVMDebugInfoPDB.lib;LLVMSymbolize.lib;LLVMExecutionEngine.lib;LLVMInterpreter.lib;LLVMJITLink.lib;LLVMMCJIT.lib;LLVMOrcJIT.lib;LLVMRuntimeDyld.lib;LLVMTarget.lib;LLVMX86CodeGen.lib;LLVMX86AsmParser.lib;LLVMX86Disassembler.lib;LLVMX86Desc.lib;LLVMX86Info.lib;LLVMX86Utils.lib;LLVMAsmParser.lib;LLVMLineEditor.lib;LLVMProfileData.lib;LLVMCoverage.lib;LLVMPasses.lib;LLVMTextAPI.lib;LLVMDlltoolDriver.lib;LLVMLibDriver.lib;LLVMXRay.lib;LLVMWindowsManifest.lib;LLVM-C.lib;Remarks.lib;`.
 
 Create a `main.cpp` file.
 
