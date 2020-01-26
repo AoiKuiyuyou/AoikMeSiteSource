@@ -25,7 +25,7 @@ $output: chroot://path=./index.html&from=root://src&to=root://release
 # Lua execution flow
 Lua version 5.3.5.
 
-```
+`````
 # ----- lua.c--main (6NJXA) -----
 # Main function.
 #
@@ -1855,4 +1855,4 @@ vmcase(OP_RETURN)
 
     goto newframe;  /* restart luaV_execute over new Lua function */
   }
-```
+`````
